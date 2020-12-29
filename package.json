@@ -1,0 +1,17 @@
+{
+  "name": "decent-examples",
+  "version": "0.0.2",
+  "description": "Examples for using decent",
+  "author": "Hexagon <Hexagon@GitHub>",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.8.17",
+    "colors": "^1.4.0",
+    "minimist": "^1.2.3"
+  }
+}
