@@ -1,3 +1,5 @@
+const { on } = require("process");
+
 var {network, encryption } = require("../../decent"),
     gui = require("./gui"),
     args = require("../common/cli"),
@@ -36,10 +38,10 @@ function setTitle(d) {
 // Handle network events
 d.events.on('message:reply',(node, messageType) => gui.log.log("REPL:"+node.toString()+">"+messageType));
 d.events.on('message:send',(node, message, err, res) => gui.log.log("SEND:"+node+">"+message.type+":"+err));
-d.events.on('message:received', (message) => {
-    gui.log.log("RECV:"+message.from.substr(message.from.length-12)+">"+message.type+message.payload);
+d.events.on('message:received', (message, socket) => {
+    gui.log.log("RECV:"+socket.node.uuid+">"+message.type);
     if (message.type=='broadcast') {
-        gui.history.log('BROADCAST  IN@' + d.node.uuid + '> ' + message.payload.message);
+        gui.history.log('BROADCAST  IN@' + socket.node.uuid + '> ' + message.payload.message);
     }
     gui.screen.render();
 });
