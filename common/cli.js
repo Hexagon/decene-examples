@@ -1,5 +1,5 @@
 var
-    package= require('../package.json'),
+    package= require('../../decent/package.json'),
     os = require('os'),
 	args = require('minimist')(process.argv.slice(2), {
 		string: ['ip','port','spawn','vector','init',],
@@ -32,8 +32,6 @@ function printHelp() {
     console.log(`
                 --init          Generate RSA-keys and UUID
         -s      --spawn         
-
-        -e      --vector        Set vector, example: --vector 1,3,5
 
         -a      --address       Set listen ip (Default: 0.0.0.0) 
         -p      --port          Set public port (Default: 47474)

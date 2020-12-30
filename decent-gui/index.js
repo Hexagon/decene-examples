@@ -1,6 +1,6 @@
 const { on } = require("process");
 
-var {network, encryption } = require("../../decent"),
+var {network, encryption } = require("decent"),
     gui = require("./gui"),
     args = require("../common/cli"),
     fs = require('fs'),
