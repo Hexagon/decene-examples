@@ -1,4 +1,4 @@
-var { network, encryption } = require("decent"),
+var { network, encryption } = require("decene"),
     args = require("../common/cli"),
     fs = require('fs'),
     id;

@@ -1,5 +1,5 @@
 var
-    package= require('../../decent/package.json'),
+    package= require('../package.json'),
     os = require('os'),
 	args = require('minimist')(process.argv.slice(2), {
 		string: ['ip','port','spawn','vector','init',],

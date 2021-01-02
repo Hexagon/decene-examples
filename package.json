@@ -9,10 +9,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "decent": "*",
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.17",
     "colors": "^1.4.0",
+    "croner": "^1.1.23",
+    "decene": "^0.0.3",
     "minimist": "^1.2.3"
   }
 }

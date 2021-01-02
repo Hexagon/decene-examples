@@ -1,6 +1,6 @@
 const { on } = require("process");
 
-var {network, encryption } = require("decent"),
+var {network, encryption } = require("decene"),
     gui = require("./gui"),
     args = require("../common/cli"),
     fs = require('fs'),
@@ -36,12 +36,12 @@ function setTitle(d) {
 }
 
 // Handle network events
-d.events.on('message:reply',(node, messageType) => gui.log.log("REPL:"+node.toString()+">"+messageType));
+d.events.on('message:reply',(socket, message) => gui.log.log("REPL:"+(socket.node || socket.remoteAddress) +">"+message.type));
 d.events.on('message:send',(node, message, err, res) => gui.log.log("SEND:"+node+">"+message.type+":"+err));
-d.events.on('message:received', (message, socket) => {
-    gui.log.log("RECV:"+socket.node.uuid+">"+message.type);
+d.events.on('message:received', (message, socket,uuid) => {
+    gui.log.log("RECV:"+(socket.node || socket.remoteAddress)+">"+message.type);
     if (message.type=='broadcast') {
-        gui.history.log('BROADCAST  IN@' + socket.node.uuid + '> ' + message.payload.message);
+        gui.history.log('BROADCAST  IN@' + socket.address + '> ' + message.payload.message);
     }
     gui.screen.render();
 });
@@ -53,6 +53,7 @@ d.events.on('state:changed',(prevState,curState) => {
     gui.history.log("State changed:"+prevState+">"+curState);
 });
 d.events.on('server:error', (err) => gui.log.log("ERR:"+err));
+d.events.on('error', (err) => gui.log.log("ERR:"+err));
 d.events.on('server:listening', (port) => gui.log.log("Listening at "+port));
 d.events.on('ip:changed',(ip) => {gui.log.log("Public ip changed by public demand:"+ip);});
 
