@@ -27,7 +27,7 @@ try {
     console.error('Warning: Could not load cache.');
 }
 
-// Init decent
+// Init decene
 var d = new network(id, args.address,args.port,args.spawn, cache);
 
 // Console GUI

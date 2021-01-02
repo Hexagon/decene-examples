@@ -1,4 +1,4 @@
-var { network, encryption } = require("decent"),
+var { network, encryption } = require("decene"),
     args = require("../common/cli"),
     id;
 
@@ -24,7 +24,7 @@ try {
     console.error('Warning: Could not load cache.');
 }
 
-// Init decent
+// Init decene
 var d = new network(id,args.address,args.port,args.spawn,cache);
 
 // Handle network events

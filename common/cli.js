@@ -9,8 +9,8 @@ var
             port: 47474,
             init: false,
 			spawn: false,
-            identity: os.homedir() + '/.decent.id',
-            cache: os.homedir() + '/.decent.registry.cache',
+            identity: os.homedir() + '/.decene.id',
+            cache: os.homedir() + '/.decene.registry.cache',
             provide: false,
             request: false
 		},
@@ -36,8 +36,8 @@ function printHelp() {
         -a      --address       Set listen ip (Default: 0.0.0.0) 
         -p      --port          Set public port (Default: 47474)
 
-        -i      --identity      Identity file (Default: ~/.decent.id)
-        -c      --cache         Cache file (Default: ~/.decent.registry.cache)
+        -i      --identity      Identity file (Default: ~/.decene.id)
+        -c      --cache         Cache file (Default: ~/.decene.registry.cache)
 
         -v      --version       Print version
         -h      --help          This help

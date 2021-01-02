@@ -1,7 +1,7 @@
 {
-  "name": "decent-examples",
+  "name": "decene-examples",
   "version": "0.0.2",
-  "description": "Examples for using decent",
+  "description": "Examples for using decene",
   "author": "Hexagon <Hexagon@GitHub>",
   "license": "MIT",
   "main": "index.js",
@@ -13,7 +13,7 @@
     "blessed-contrib": "^4.8.17",
     "colors": "^1.4.0",
     "croner": "^1.1.23",
-    "decene": "^0.0.3",
+    "decene": "0.0.4",
     "minimist": "^1.2.3"
   }
 }
