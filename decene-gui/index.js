@@ -53,7 +53,9 @@ d.events.on('state:changed',(prevState,curState) => {
     gui.history.log("State changed:"+prevState+">"+curState);
 });
 d.events.on('server:error', (err) => gui.log.log("ERR:"+err));
+d.events.on('socket:error', (err) => gui.log.log("ERR:"+err));
 d.events.on('error', (err) => gui.log.log("ERR:"+err));
+
 d.events.on('server:listening', (port) => gui.log.log("Listening at "+port));
 d.events.on('ip:changed',(ip) => {gui.log.log("Public ip changed by public demand:"+ip);});
 

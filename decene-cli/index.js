@@ -52,7 +52,9 @@ d.events.on('message:received', (message) => {
 d.events.on('state:changed',(prevState,curState) => {
     console.log("State changed: "+prevState+" -> "+curState);
 });
-d.events.on('server:error', (err) => console.log("ERR:"+err));
+d.events.on('server:error', (err) => console.log("Server error:"+err));
+d.events.on('socket:error', (err) => console.log("Client error:"+err));
+d.events.on('error', (err) => console.log("Communication error:"+err));
 d.events.on('server:listening', (port) => console.log("Listening at " + port));
 d.events.on('ip:changed',(ip) => {
     console.log("Public ip verified: "+ip);
