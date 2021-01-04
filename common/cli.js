@@ -2,8 +2,8 @@ var
     package= require('../package.json'),
     os = require('os'),
 	args = require('minimist')(process.argv.slice(2), {
-		string: ['ip','port','spawn','vector','init',],
-		boolean: ['version','help'],
+		string: ['address','port','spawn','init','upnp'],
+		boolean: ['version','help','upnp'],
 		default: {
 			address: '0.0.0.0',
             port: 47474,
@@ -12,9 +12,10 @@ var
             identity: os.homedir() + '/.decene.id',
             cache: os.homedir() + '/.decene.registry.cache',
             provide: false,
-            request: false
+            request: false,
+            upnp: false
 		},
-		alias: { v: 'version', h: 'help', a: 'address', p: 'port', s: 'spawn', i: 'identity', c: 'cache', e: 'vector'}
+		alias: { v: 'version', h: 'help', a: 'address', p: 'port', s: 'spawn', i: 'identity', c: 'cache', e: 'vector', u: 'upnp'}
 	});
 
 function printHeader() {
@@ -35,6 +36,7 @@ function printHelp() {
 
         -a      --address       Set listen ip (Default: 0.0.0.0) 
         -p      --port          Set public port (Default: 47474)
+        -u      --upnp          Use NAT UPnP to automatically open port
 
         -i      --identity      Identity file (Default: ~/.decene.id)
         -c      --cache         Cache file (Default: ~/.decene.registry.cache)

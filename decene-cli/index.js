@@ -27,17 +27,18 @@ try {
 // Init decene
 var d = new network(id,args.address,args.port,args.spawn,cache);
 
+// Use UPnP
+if (args.upnp !== false) {
+    d.tryUpnp();
+}
+
 // Handle network events
-d.events.on('message:send',(node, message, err, res) => {
-    console.log(message.type + ' OUT@' + d.node.address + '> ' + node + '> ' + message.payload.message);
+d.events.on('message:reply',(socket, message) => console.log("REPL:"+(socket.node.uuid || socket.remoteAddress) +">"+message.type));
+d.events.on('message:send',(node, message, err, res) => console.log("SEND:"+(node.uuid || "spawn")+">"+message.type));
+d.events.on('message:received', (message, socket,uuid) => {
+    console.log("RECV:"+(socket.node.uuid || socket.remoteAddress)+">"+message.type);
     if (message.type=='broadcast') {
-        console.log('BROADCAST OUT@' + d.node.address + '> ' + node + '> ' +  message.payload.message);
-    }
-});
-d.events.on('message:received', (message) => {
-    console.log(message.type + ' IN@' + d.node.address + '> ' + message.payload.message);
-    if (message.type=='broadcast') {
-        console.log('BROADCAST IN@' + d.node.address + '> ' + message.payload.message);
+        console.log('BROADCAST  IN@' + socket.remoteAddress + '> ' + message.payload.message);
     }
 });
 
@@ -67,3 +68,18 @@ d.events.on('upnp:success',() => {
 
 // Handle registry events
 d.events.on('node:discover', (node) => { console.log('Discover: ' + node.uuid );  });
+
+// Handle registry cache
+d.events.on('registry:batch', (node) => {
+
+    console.log('Registry batch updated.'); 
+
+    fs.writeFile(args.cache, JSON.stringify(d.reg.serialize()), err => {
+      if (err) {
+        console.log("Registry cache flush failed: " + err);
+        return;
+      } else {
+        console.log("Registry cache flushed to disc");
+      }
+    })
+});

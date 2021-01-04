@@ -1,8 +1,5 @@
-const { on } = require("process");
-
-// Local development with adjacent dir
-// var {network, encryption } = require("../../decene/lib"),
 var {network, encryption } = require("decene"),
+
     gui = require("./gui"),
     args = require("../common/cli"),
     fs = require('fs'),
@@ -32,18 +29,23 @@ try {
 // Init decene
 var d = new network(id, args.address,args.port,args.spawn, cache);
 
+// Use UPnP
+if (args.upnp !== false) {
+    d.tryUpnp();
+}
+
 // Console GUI
 function setTitle(d) {
     gui.setTitle(d.state, d.node.uuid, d.connectivity, d.reg.count('alive'), d.reg.count());
 }
 
 // Handle network events
-d.events.on('message:reply',(socket, message) => gui.log.log("REPL:"+(socket.node || socket.remoteAddress) +">"+message.type));
-d.events.on('message:send',(node, message, err, res) => gui.log.log("SEND:"+node+">"+message.type+":"+err));
+d.events.on('message:reply',(socket, message) => gui.log.log("REPL:"+(socket.node.uuid || socket.remoteAddress) +">"+message.type));
+d.events.on('message:send',(node, message, err, res) => gui.log.log("SEND:"+(node.uuid || "spawn")+">"+message.type));
 d.events.on('message:received', (message, socket,uuid) => {
-    gui.log.log("RECV:"+(socket.node || socket.remoteAddress)+">"+message.type);
+    gui.log.log("RECV:"+(socket.node.uuid || socket.remoteAddress)+">"+message.type);
     if (message.type=='broadcast') {
-        gui.history.log('BROADCAST  IN@' + socket.address + '> ' + message.payload.message);
+        gui.history.log('BROADCAST  IN@' + socket.remoteAddress + '> ' + message.payload.message);
     }
     gui.screen.render();
 });
