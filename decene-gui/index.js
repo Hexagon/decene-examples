@@ -1,5 +1,7 @@
 const { on } = require("process");
 
+// Local development with adjacent dir
+// var {network, encryption } = require("../../decene/lib"),
 var {network, encryption } = require("decene"),
     gui = require("./gui"),
     args = require("../common/cli"),
