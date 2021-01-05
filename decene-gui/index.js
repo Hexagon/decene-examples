@@ -50,12 +50,6 @@ d.events.on('message:received', (message, socket,uuid) => {
     gui.screen.render();
 });
 
-d.events.on('state:changed',(prevState,curState) => {
-    setTitle(d);
-    gui.log.log("State changed:"+prevState+">"+curState);
-    gui.updateTable(d.node, d.reg.r);
-    gui.history.log("State changed:"+prevState+">"+curState);
-});
 d.events.on('server:error', (err) => gui.log.log("ERR:"+err));
 d.events.on('socket:error', (err) => gui.log.log("ERR:"+err));
 d.events.on('error', (err) => gui.log.log("ERR:"+err));
